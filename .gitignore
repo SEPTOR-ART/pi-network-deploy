@@ -1,0 +1,10 @@
+ECHO is on.
+# Ignore node_modules (not needed for your frontend-only project, but good practice)
+node_modules/
+
+# Ignore environment files with sensitive data
+.env
+
+# Ignore temporary files
+*.log
+*.tmp

